@@ -21,7 +21,7 @@ FIRMWARE = "am.bif fm.bif dab.bif patch.bin"
 
 do_install() {
     install -d ${D}${bindir}
-    install -d ${D}/lib/firmware/radio/
+    install -d ${D}${nonarch_base_libdir}/firmware/radio/
 
     install -m 755 si_ctl ${D}${bindir}
     install -m 755 si_flash ${D}${bindir}
@@ -31,11 +31,11 @@ do_install() {
     done
 
     for file in ${FIRMWARE}; do
-        install -m 644 ${S}/firmware/$file ${D}/lib/firmware/radio/
+        install -m 644 ${S}/firmware/$file ${D}${nonarch_base_libdir}/firmware/radio/
     done
 }
 
 FILES:${PN} = " \
     ${bindir} \
-    /lib/firmware/radio \
+    ${nonarch_base_libdir}/firmware/radio \
 "
