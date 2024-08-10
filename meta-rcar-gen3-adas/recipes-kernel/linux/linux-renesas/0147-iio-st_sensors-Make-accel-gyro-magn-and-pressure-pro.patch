@@ -77,10 +77,10 @@ index 5c746ff..9417b3b 100644
  int st_press_allocate_ring(struct iio_dev *indio_dev);
  void st_press_deallocate_ring(struct iio_dev *indio_dev);
 diff --git a/include/linux/iio/common/st_sensors.h b/include/linux/iio/common/st_sensors.h
-index 33e9399..aa017b9 100644
+index c16a9dda3ad5..fcfa8b0af53b 100644
 --- a/include/linux/iio/common/st_sensors.h
 +++ b/include/linux/iio/common/st_sensors.h
-@@ -317,4 +317,24 @@ ssize_t st_sensors_sysfs_scale_avail(struct device *dev,
+@@ -320,4 +320,24 @@ ssize_t st_sensors_sysfs_scale_avail(struct device *dev,
  
  void st_sensors_dev_name_probe(struct device *dev, char *name, int len);
  

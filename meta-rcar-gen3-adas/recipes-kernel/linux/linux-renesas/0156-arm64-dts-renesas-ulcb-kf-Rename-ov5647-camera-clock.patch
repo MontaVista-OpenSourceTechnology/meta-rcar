@@ -13,10 +13,10 @@ Signed-off-by: Valentine Barshak <valentine.barshak@cogentembedded.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi b/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-index 00abac9..0834862 100644
+index 838276e24d8b..98adf1e4ec47 100644
 --- a/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
 +++ b/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-@@ -221,7 +221,7 @@
+@@ -211,7 +211,7 @@ camera_clk: camera_clk {
  		clock-output-names = "mclk";
  	};
  

@@ -17,10 +17,10 @@ Signed-off-by: Valentine Barshak <valentine.barshak@cogentembedded.com>
  1 file changed, 2 insertions(+), 12 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi b/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-index 0834862..457cd50 100644
+index 98adf1e4ec47..a4f91a994332 100644
 --- a/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
 +++ b/arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-@@ -757,6 +757,8 @@
+@@ -747,6 +747,8 @@ cmos_camera: ov5642@3c {
  				reg = <0x3c>;
  				clocks = <&camera_clk>;
  				clock-names = "mclk";
@@ -29,7 +29,7 @@ index 0834862..457cd50 100644
  
  				port@0 {
  					cmos_camera_out: endpoint {
-@@ -845,18 +847,6 @@
+@@ -835,18 +837,6 @@ port_a_a1 {
  			output-high;
  			line-name = "Video-A A1";
  		};
