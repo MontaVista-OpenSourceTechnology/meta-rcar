@@ -22,7 +22,6 @@ RDEPENDS_packagegroup-radio = " \
     ofono \
     ofono-tests \
     si-tools \
-    ti-bt \
     ti-bt-firmware \
     iw \
     ${@bb.utils.contains('DISTRO_FEATURES', "pulseaudio", "${PULSEAUDIO_RADIO_PACKAGES}", "", d)} \
