@@ -12,6 +12,7 @@ PV = "0.2"
 SRC_URI = " \
     file://si-tools.tar.gz \
     file://si46xx_flash_write_typo_fix.patch \
+    file://scripts_si_scan_fix_xdg_runtime_dir_warning.patch \
 "
 
 S = "${WORKDIR}/si-tools"
