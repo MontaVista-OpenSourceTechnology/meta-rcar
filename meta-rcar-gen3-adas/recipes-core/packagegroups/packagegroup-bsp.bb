@@ -67,6 +67,7 @@ RDEPENDS:packagegroup-bsp-custom = " \
     bonnie++ \
     can-utils \
     capture \
+    media-ctl \
     e2fsprogs \
     e2fsprogs-tune2fs \
     e2fsprogs-resize2fs \
