@@ -10,7 +10,7 @@ ATFW_OPT:r8a77980 = "LSI=V3H RCAR_DRAM_SPLIT=0 RCAR_LOSSY_ENABLE=0 PMIC_ROHM_BD9
 ATFW_OPT:append = " ${@oe.utils.conditional("CA57CA53BOOT", "1", " PSCI_DISABLE_BIGLITTLE_IN_CA57BOOT=0", "", d)}"
 ATFW_OPT:append = " LIFEC_DBSC_PROTECT_ENABLE=0"
 ATFW_OPT_RPC = "${@oe.utils.conditional("DISABLE_RPC_ACCESS", "1", " RCAR_RPC_HYPERFLASH_LOCKED=1", "RCAR_RPC_HYPERFLASH_LOCKED=0", d)}"
-ATFW_OPT:append = " ${ATFW_OPT_RPC}"
+ATFW_OPT_BOOTMODE:append = " ${ATFW_OPT_RPC}"
 
 SRC_URI:append = " \
     file://0001-plat-renesas-bl31-Enable-RPC-access-if-necessary.patch \
@@ -18,22 +18,6 @@ SRC_URI:append = " \
     file://0003-drivers-renesas-io_memdrv-Invalidate-cache-before-ex.patch \
     file://0004-plat-renesas-rcar-Add-R-Car-V3H-support.patch \
 "
-
-# Override the do_ipl_opt_compile function to add the ${ATFW_OPT_RPC} option
-do_ipl_opt_compile () {
-    oe_runmake distclean
-    oe_runmake bl2 bl31 rcar_layout_tool rcar_srecord PLAT=${PLATFORM} SPD=opteed MBEDTLS_COMMON_MK=1 ${EXTRA_ATFW_OPT} ${ATFW_OPT_LOSSY} ${ATFW_OPT_RPC}
-}
-
-do_ipl_opt_deploy:append () {
-    install -m 0644 ${S}/tools/renesas/rcar_layout_create/bootparam_sa0.bin ${DEPLOYDIR}/bootparam_sa0-${EXTRA_ATFW_CONF}.bin
-    install -m 0644 ${S}/tools/renesas/rcar_layout_create/cert_header_sa6.bin ${DEPLOYDIR}/cert_header_sa6-${EXTRA_ATFW_CONF}.bin
-}
-
-do_deploy:append() {
-    install -m 0644 ${S}/tools/renesas/rcar_layout_create/bootparam_sa0.bin ${DEPLOYDIR}/bootparam_sa0.bin
-    install -m 0644 ${S}/tools/renesas/rcar_layout_create/cert_header_sa6.bin ${DEPLOYDIR}/cert_header_sa6.bin
-}
 
 do_deploy:append:r8a77970() {
     rm ${DEPLOYDIR}/bootparam_sa0.bin
