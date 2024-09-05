@@ -1,0 +1,21 @@
+Use waylandsink by default
+
+This sets fullscreen waylansink by default
+to avoid display issues when video size changes.
+
+diff --git a/renderers/video_renderer_gstreamer.c b/renderers/video_renderer_gstreamer.c
+index dee6d50..dd89993 100644
+--- a/renderers/video_renderer_gstreamer.c
++++ b/renderers/video_renderer_gstreamer.c
+@@ -112,7 +112,7 @@ video_renderer_t *video_renderer_gstreamer_init(logger_t *logger, video_renderer
+     }
+ 
+     // Finish the pipeline
+-    g_string_append(launch, "autovideosink name=video_sink sync=false");
++    g_string_append(launch, "waylandsink name=video_sink sync=false fullscreen=true");
+ 
+     renderer->pipeline = gst_parse_launch(launch->str, &error);
+     g_assert(renderer->pipeline);
+-- 
+2.25.1
+
