@@ -3,16 +3,21 @@ DESCRIPTION = "An open-source implementation of an AirPlay mirroring server for 
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
+require include/omx-control.inc
+
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-DEPENDS += "libplist mdns gstreamer1.0-plugins-base gstreamer1.0-libav gstreamer1.0-plugins-bad"
+DEPENDS += "libplist mdns gstreamer1.0-plugins-base gstreamer1.0-plugins-bad \
+    ${@oe.utils.conditional("USE_OMX_COMMON", "1", "gstreamer1.0-omx", "gstreamer1.0-libav", d)} \
+"
 
 S = "${WORKDIR}/git"
 
 BRANCH = "master"
 SRC_URI = "git://github.com/FD-/RPiPlay.git;branch=${BRANCH};protocol=https \
     file://0001-Use-waylandsink-by-default.patch \
+    ${@oe.utils.conditional("USE_OMX_COMMON", "1", "file://0002-Enable-omx-decoders.patch", "", d)} \
 "
 
 SRCREV = "64d0341ed3bef098c940c9ed0675948870a271f9"

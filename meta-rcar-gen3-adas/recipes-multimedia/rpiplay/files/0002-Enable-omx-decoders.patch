@@ -1,0 +1,44 @@
+Enable omx decoders
+
+This enables h264 and aaclc omx decoders.
+Use no-copy omxh264dec property to avoid
+video skewing issue.
+
+diff --git a/renderers/audio_renderer_gstreamer.c b/renderers/audio_renderer_gstreamer.c
+index e461ac3..0d0b46b 100644
+--- a/renderers/audio_renderer_gstreamer.c
++++ b/renderers/audio_renderer_gstreamer.c
+@@ -36,7 +36,7 @@ static gboolean check_plugins(void)
+     int i;
+     gboolean ret;
+     GstRegistry *registry;
+-    const gchar *needed[] = {"app", "libav", "playback", "autodetect", NULL};
++    const gchar *needed[] = {"app", "omxaaclcdec", "playback", "autodetect", NULL};
+ 
+     registry = gst_registry_get();
+     ret = TRUE;
+diff --git a/renderers/video_renderer_gstreamer.c b/renderers/video_renderer_gstreamer.c
+index dd89993..7e44ac7 100644
+--- a/renderers/video_renderer_gstreamer.c
++++ b/renderers/video_renderer_gstreamer.c
+@@ -35,7 +35,7 @@ static gboolean check_plugins(void)
+     int i;
+     gboolean ret;
+     GstRegistry *registry;
+-    const gchar *needed[] = {"app", "libav", "playback", "autodetect", "videoparsersbad", NULL};
++    const gchar *needed[] = {"app", "omxh264dec", "playback", "autodetect", "videoparsersbad", NULL};
+ 
+     registry = gst_registry_get();
+     ret = TRUE;
+@@ -69,7 +69,7 @@ video_renderer_t *video_renderer_gstreamer_init(logger_t *logger, video_renderer
+ 
+     // Begin the video pipeline
+     GString *launch = g_string_new("appsrc name=video_source stream-type=0 format=GST_FORMAT_TIME is-live=true !"
+-                                   "queue ! decodebin ! videoconvert ! ");
++                                   "queue ! h264parse ! omxh264dec no-copy=true ! ");
+     // Setup rotation
+     if (config->rotation != 0) {
+         switch (config->rotation) {
+-- 
+2.25.1
+
