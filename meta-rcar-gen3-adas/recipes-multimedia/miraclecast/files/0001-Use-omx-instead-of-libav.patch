@@ -1,0 +1,38 @@
+diff --git a/res/miracle-gst b/res/miracle-gst
+index 9a2a4db..497df87 100755
+--- a/res/miracle-gst
++++ b/res/miracle-gst
+@@ -82,7 +82,7 @@ then
+   RUN+="name=demuxer demuxer. "
+ fi
+ 
+-RUN+="! queue max-size-buffers=0 max-size-time=0 ! h264parse ! avdec_h264 ! videoconvert ! "
++RUN+="! queue max-size-buffers=0 max-size-time=0 ! h264parse ! omxh264dec ! videoconvert ! "
+ 
+ if [ $SCALE == '1' ]
+ then
+@@ -93,7 +93,7 @@ RUN+="autovideosink "
+ 
+ if [ $AUDIO == '1' ]
+ then
+-  RUN+="demuxer. ! queue max-size-buffers=0 max-size-time=0 ! aacparse ! avdec_aac ! audioconvert ! audioresample ! autoaudiosink "
++  RUN+="demuxer. ! queue max-size-buffers=0 max-size-time=0 ! aacparse ! omxaaclcdec ! audioconvert ! audioresample ! autoaudiosink "
+ fi
+ 
+ echo "running: $RUN"
+diff --git a/res/test-viewer.sh b/res/test-viewer.sh
+index 914012c..358fa41 100755
+--- a/res/test-viewer.sh
++++ b/res/test-viewer.sh
+@@ -31,7 +31,7 @@ then
+    cat <<EOF 
+ Some plugins required for visualization are missed
+ 
+-Try installing packages "gst-plugins-bad, gst-plugins-base, gst-plugins-base-libs, gst-plugins-good, gst-plugins-ugly, gst-libav, gstreamer".
++Try installing packages "gst-plugins-bad, gst-plugins-base, gst-plugins-base-libs, gst-plugins-good, gst-plugins-ugly, gst-omx, gstreamer".
+ 
+ If that fails too, try:
+ 
+-- 
+2.25.1
+
